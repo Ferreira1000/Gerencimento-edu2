@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title></title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+		<link href="css/padrao.css" rel="stylesheet">
+		<link href="assets/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+	</head>
+
+
+
+	<body>
+		<div class="principal-fundo">
+            <div class="logo-principal">
+                <a><img src="img/logo-black.png" style="width: 200px; height: 80px; margin-bottom: 15px;"></a>
+
+                <div class="b-navegação">
+                  <button id="logout" type="button" class="btn btn-danger btn-logout">Logout</button>
+                </div>
+
+                <div class="h2-principal">
+                  <h2>Gerenciamento de Agendamentos</h2>
+                </div>
+
+                <div>
+                    <table class="table table-hover" style="width: 800px; margin-right: 190px;">
+                        <thead>
+                          <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Hora</th>
+                            <th scope="col">Serviço</th>
+                          </tr>
+                        </thead>
+                        <tbody id="lista">
+                          
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	</body>
+
+  <script type="module">
+        
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-app.js";
+    import { getDatabase, set, ref, update, onValue, get } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-database.js"
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-auth.js";
+    import { doc, onSnapshot, getFirestore, where, collection, query, getDocs, orderBy, getDoc } from "https://www.gstatic.com/firebasejs/9.8.4/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyAmBDH9pdq7bo7QIoU9T7uvXxuZG-YS_JE",
+        authDomain: "edubarber-ad022.firebaseapp.com",
+        projectId: "edubarber-ad022",
+        storageBucket: "edubarber-ad022.appspot.com",
+        messagingSenderId: "441531318767",
+        appId: "1:441531318767:web:904a1b9cb4f6362e1c361a"
+    };
+
+    // pega a identificação do projeto do firebase e salva em um constatnte
+
+    const app = initializeApp(firebaseConfig); // inicia a constante de configuração
+    const database = getDatabase(app); // inicia a constante de config e busca os real time database nelas presentes
+    const auth = getAuth(); // importa o aunthenticator e salva em uma constante
+
+    const user = auth.currentUser; // salva em uma constate o usuário logado atual, caso tiver
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+
+        } else {
+          window.location.replace('index.html')
+          
+        }
+    });
+
+    // detecta alterações de estado no authenticator
+
+    logout.addEventListener('click', (e)=>{
+        signOut(auth).then(() => {
+          alert('logout efetuado')
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+  
+          alert(errorMessage);
+        });
+    });
+
+    // executa a função de logout e deleta oq tiver salvo no aunthenticator
+
+    const dbFireStore = getFirestore(app); // constante que inicia o banco do firestore no projeto definido "app"
+    
+    const agendsRef = collection(dbFireStore, "Agendamentos/Julho/13"); // busca a coleção definida
+    const q = query(agendsRef, orderBy("Hora", "desc")); // faz a consulta atrás do campo "Data" nos documentos da coleção definida e os coloca em ordem crescente 
+
+    const querySnapshot = await getDocs(q); // espera para ser executado e puxa todos os documentos da coleção definida
+
+    querySnapshot.forEach(doc => { // função q pega os docs do banco e pra cada um escreve os dados na lista
+      let id_lista = document.getElementById('lista');
+      
+      console.log(doc.data());
+
+      let tr = document.createElement('tr')
+      let tdData = document.createElement('td');
+      let tdHora = document.createElement('td');
+      let tdServico = document.createElement('td');
+
+      tdData.innerText = doc.data().Data;
+      tdHora.innerText = doc.data().Hora;
+      tdServico.innerText = doc.data().Servico;
+
+      tr.appendChild(tdData);
+      tr.appendChild(tdHora);
+      tr.appendChild(tdServico);
+
+
+      id_lista.appendChild(tr);
+
+    });
+    
+    setTimeout(function() {
+      window.location.reload(1);
+    }, 600000);
+    
+    
+  </script>
+</html>

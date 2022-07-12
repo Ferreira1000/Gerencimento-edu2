@@ -1,0 +1,140 @@
+*{
+	font-family: 'Poppins', sans-serif;
+}
+
+.container-login{
+	background-color: #000;
+	position: relative;
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+	background-size: cover;
+}
+
+.quadrado-login{
+	width: 600px;
+	height: 400px;
+	background-color: #fff;
+	border-radius: 15px;
+    padding: 100px 50px;
+	padding-bottom: 200px;
+	
+}
+
+.logo{
+	margin-left: 150px;
+	margin-bottom: 20px;
+}
+
+.btn-login{
+	margin-top: 20px;
+	margin-left: 120px;
+	width: 250px;
+	height: 44px;
+	background-color: #8B0000 !important;
+	border-radius: 20px !important;
+}
+
+.principal-fundo{
+	background-color: #fff;
+	position: relative;
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	background-size: cover;
+	
+}
+
+.logo-principal{
+	margin-left: 115px;
+	margin-top: 20px;
+	
+}
+
+a {
+	color: black !important;
+	text-decoration: none !important;
+}
+
+a:hover {
+    color: blue !important;
+	text-decoration: underline !important;
+}
+
+
+.b-navegação{
+	margin-left: 250px;
+	margin-top: -70px;
+}
+
+.risco-navegação{
+	color: #fff;
+	padding: 3px;
+	margin-left: -110px;
+	text-align: center;
+	margin-top: 35px;
+	width: 98.460vw;
+	height: 30px;
+	background-color: #004564;
+}
+
+.h2-principal{
+	margin-top: 60px;
+	color: #000;
+	margin-bottom: 30px;
+}
+
+.rodapé-inicial{
+	padding: 13px;
+	width: 100vw;
+	height: 50px;
+	background-color: #004564;
+	text-align: center;
+	color: #fff;
+	margin-top: 223.5px;
+	
+}
+
+.btn-VL{
+	margin-top: -75px;
+	margin-left: 932px;
+}
+
+.divona{
+	width: 200px;
+	height: 150px;
+	margin-top: 25px;
+}
+
+.erroInput{
+	border: 1px solid red !important;
+}
+
+.msg-cadastros{
+	padding: 30px 0;
+	text-align: center;
+	border-radius: 20px;
+	background-color: aquamarine;
+	margin-bottom: 50px;
+	width: 1125px !important;
+}
+
+.msg-cadastros p {
+	font-weight:700;
+	margin: 0;
+	color: green !important;
+}
+
+.form{
+	width: 1100px !important;
+}
+
+.btn-logout{
+	margin-left: 450px;
+	width: 100px;
+	height: 44px;
+	background-color: #8B0000 !important;
+	border-radius: 20px !important;
+}
